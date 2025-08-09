@@ -35,7 +35,6 @@ mini spiele:
 - anfang kofferspiel ("am flughafen")
 - kokosnuss fang spiel
   - kokosnüsse = 1 punkt, goldene kokosnuss = 3 punkte, palmenblatt = -1 punkt
-- madeira quiz game
 - cocktail memory
   - hintergrund mit karten (cocktail & zutat) oben drauf "blätter"(rechtecke) die mit klicken weg gehen
 - surf brett pong
