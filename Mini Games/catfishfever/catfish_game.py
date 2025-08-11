@@ -36,7 +36,7 @@ def scale_height(img, target_height):
     new_width = int(img.get_width() * ratio)
     return pygame.transform.scale(img, (new_width, target_height))
 
-# load player & mask for collision
+# load player & mask for collision -> AI tu figure out masks
 player_img = pygame.image.load(os.path.join(image_folder, "tami_taucher.png")).convert_alpha()
 player_img = scale_height(player_img, 100)
 player_mask = pygame.mask.from_surface(player_img)

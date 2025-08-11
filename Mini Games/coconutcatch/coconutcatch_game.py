@@ -105,7 +105,7 @@ def draw_score_and_timer(score, time_left):
 
 # game variables
 coconuts = []
-spawn_delay = 1500
+spawn_delay = 1000
 spawn_timer = 0
 score = 0
 start_ticks = pygame.time.get_ticks()
@@ -172,5 +172,5 @@ while True:
         final_score_text = end_font.render(f"Final Score: {score}", True, (255, 220, 0))
 
         screen.blit(end_text, (screen_width // 2 - end_text.get_width() // 2, screen_height // 2 - 30))
-        screen.blit(final_score_text, (screen_width // 2 - final_score_text._))
+        screen.blit(final_score_text, (screen_width // 2 - final_score_text.get_width() // 2, screen_height // 2 + 20))
     pygame.display.flip()

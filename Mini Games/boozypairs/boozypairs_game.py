@@ -60,8 +60,8 @@ x_padding = (screen_width - (cols * card_width)) // (cols + 1)
 positions = []
 for row in range(rows):
     for col in range(cols):
-        x = x_padding + col * (card_width + x_padding)  # x pos for each card
-        y = start_y + row * (card_height + 20)          # y pos for each card, 20 px vertical gap
+        x = x_padding + col * (card_width + x_padding)
+        y = start_y + row * (card_height + 20)
         positions.append((x, y))
 
 # set up fonts for showing score and end game messages
