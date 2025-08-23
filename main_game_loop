@@ -1,0 +1,219 @@
+import numpy as np
+import pygame
+import sys
+import random
+import os
+import subprocess
+
+#initializing the game frame
+pygame.init()
+screen_width = 1280
+screen_height = 720
+screen = pygame.display.set_mode((screen_width, screen_height))
+pygame.display.set_caption("Madeira-Party!")
+
+board_image = pygame.image.load("board_map.png").convert_alpha()
+
+#loading player images
+player_images = [
+    pygame.image.load("Finja.png").convert_alpha(),
+    pygame.image.load("Jan.png").convert_alpha(),
+    pygame.image.load("Nina.png").convert_alpha(),
+    pygame.image.load("Qianxun.png").convert_alpha(),
+    pygame.image.load("racoon.png").convert_alpha(),
+]
+
+# defining the board fields
+board_positions = [
+    "blue",   # -3 points
+    "white",  # neutral
+    "yellow", # minigame
+    "pink",   # +2 points
+    "white",
+    "blue",
+    "white",
+    "yellow",
+    "pink",
+    "white",
+    "yellow",
+    "white",
+    "pink",
+    "yellow",
+    "white",
+    "blue"
+]
+
+#defining the field positions
+board_coords = [
+    (1779,167), #field 0
+    (1261,197), #field 1
+    (815,286), #field 2
+    (505,510), #field 3
+    (267,777), #field 4
+    (205,1147), #field 5
+    (275,1484), #field 6
+    (518,1789), #field 7
+    (766,2086), #field 8
+    (1201,2175), #field 9
+    (1617,2227), #field 10
+    (2084,2229), #field 11
+    (2487,2084), #field 12
+    (2822,1967), #field 13
+    (3140,1827), #field 14
+    (3264,1549), #field 15
+    (3383,1263), #field 16
+    (3256,877), #field 17
+    (3070,512), #field 18
+    (2703,313), #field 19
+    (2322,202) #field 20
+]
+#this part was created with ai
+assert len(board_positions) == len(board_coords)
+#
+
+#classes for the game logic
+
+class Player:
+    def __init__(self, name, image, start_pos=0):
+        self.name = name
+        self.position = start_pos
+        self.score = 0
+        self.minigames_played = 0
+        self.image = image
+        self.active = True
+
+#updating board position
+    def move(self, steps, board_size):
+        self.position = (self.position + steps) % board_size
+
+    def get_coords(self, board_coords):
+        return board_coords[self.position]
+
+class Game:
+    def __init__(self, player_names, player_images, board_positions, board_coords):
+        self.players = [
+            Player(name, image)
+            for name, image in zip(player_names, player_images)
+            ]
+        self.board_positions = board_positions
+        self.board_coords = board_coords
+        self.turn_index = 0
+        self.finished_players = set()
+        self.total_minigames = 5
+
+    def roll_dice(self):
+        return np.random.randint(1, 7)
+
+    def apply_field(self, player):
+        field = self.board_positions[player.position]
+        if field == "blue":
+            player.score -= 3
+        elif field == "pink":
+            player.score += 2
+        elif field == "yellow":
+            player.minigames_played += 1
+            minigame_score = self.play_minigame(player)
+            player.score += minigame_score
+        # white fields: no action
+
+#integrating the minigames
+    def play_minigame(self, player):
+        print(f"{player.name} plays a minigame.")
+        minigames = [
+            "boozypairs_game.py",
+            "catfish_game.py",
+            "coconutcatch_game.py",
+            "Luggage_game.py"
+        ]
+        chosen_game = random.choice(minigames)
+        print(f"{player.name} starts {chosen_game."}
+        result = subprocess.run(
+            ["python", chosen_game],
+            capture_output = True, text = True
+        )
+        output_lines = result.stdout.strip().split("\n")
+        if output_lines:
+            try:
+                score = int(output_lines[-1])
+            except ValueError:
+                score = 0
+        else:
+            score = 0
+        return score
+
+    def play_turn(self):
+        player = self.players[self.turn_index]
+        if player.minigames_played >= self.total_minigames:
+            player.active = False
+            self.finished_players.add(player.name)
+            print(f"{player.name} is done and skips this turn.")
+            self.next_turn()
+            return
+
+        dice = self.roll_dice()
+        print(f"{player.name} rolls {dice}.")
+        player.move(dice, len(self.board_positions))
+        print(f"{player.name} lands on the field {player.position} ({self.board_positions[player.position]}).")
+        self.apply_field(player)
+        print(f"{player.name} has now {player.score} points and played {player.minigames_played} minigames.")
+
+        if len(self.finished_players) == len(self.players):
+            print("All players are done. The Game is over!")
+            self.show_results()
+            return True
+
+        self.next_turn()
+        return False
+
+    def next_turn(self):
+        # identify the next active player
+        orig_index = self.turn_index
+        while True:
+            self.turn_index = (self.turn_index + 1) % len(self.players)
+            if self.players[self.turn_index].active:
+                break
+            # endless security
+            if self.turn_index == orig_index:
+                break
+
+    def show_results(self):
+        print("FINAL SCORE:")
+        for player in self.players:
+            print(f"{player.name}: {player.score} points")
+
+# main game
+def main():
+    player_names = ["Player1", "Player2", "Player3", "Player4", "Player5"]
+    game = Game(player_names, player_images, board_positions, board_coords)
+    font = pygame.font.SysFont(None, 33)
+    clock = pygame.time.Clock()
+    finished = False
+
+    while not finished:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+        screen.fill((0,0,0))
+        screen.blit(board_image, (0,0))
+
+       # this part was created with ai - drawing players on board
+        for idx, player in enumerate(game.players):
+            x, y = board_coords[player.position]
+            icon = player.image
+            screen.blit(icon, (x-20+idx*6, y-40+idx*6))
+            name_img = font.render(player.name, True, (235, 220, 235))
+            screen.blit(name_img, (x-20+idx*6, y-60+idx*6))
+
+        pygame.display.flip()
+
+        pygame.time.wait(700)
+        finished = game.play_turn()
+        clock.tick(30)
+
+if __name__ == "__main__":
+    main()
+
+
+
