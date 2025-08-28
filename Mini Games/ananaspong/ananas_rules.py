@@ -8,7 +8,7 @@ SCREEN_WIDTH, SCREEN_HEIGHT = 960, 720
 
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Catfish Fever - Rules")
+pygame.display.set_caption("Ananaspong - Rules")
 clock = pygame.time.Clock()
 
 # load images
@@ -73,7 +73,9 @@ while running:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if arrow_rect.collidepoint(event.pos):
                 # start the actual game
-                subprocess.Popen(["python", "Mini Games/ananaspong/ananas_game.py"])
+                minigame_path = os.path.join(project_root, "Mini Games", "ananaspong", "ananas_game.py")
+                proc = subprocess.Popen([sys.executable, minigame_path])
+                proc.wait()
                 pygame.quit()
                 sys.exit()
 
