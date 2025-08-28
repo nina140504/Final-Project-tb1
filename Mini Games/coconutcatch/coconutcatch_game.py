@@ -174,3 +174,7 @@ while True:
         screen.blit(end_text, (screen_width // 2 - end_text.get_width() // 2, screen_height // 2 - 30))
         screen.blit(final_score_text, (screen_width // 2 - final_score_text.get_width() // 2, screen_height // 2 + 20))
     pygame.display.flip()
+
+    print(score)
+    pygame.quit()
+    sys.exit()
