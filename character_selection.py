@@ -2,9 +2,10 @@ import pygame
 import sys
 import os
 import subprocess
+import time
 
-SCREEN_WIDTH, SCREEN_HEIGHT = 1280, 720
 pygame.init()
+SCREEN_WIDTH, SCREEN_HEIGHT = 1280, 720
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Choose your charakter.")
 clock = pygame.time.Clock()
@@ -157,7 +158,7 @@ while running:
                 base_path = os.path.dirname(os.path.abspath(__file__))
                 main_game_path = os.path.join(base_path, "main_game_loop.py")
                 proc = subprocess.Popen([sys.executable, main_game_path])
-                proc.wait()
+                time.sleep(1.5)
                 pygame.quit()
                 sys.exit()
         elif event.type == pygame.KEYDOWN:

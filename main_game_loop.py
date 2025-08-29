@@ -19,13 +19,14 @@ board_image = pygame.transform.scale(board_image, (screen_width, screen_height))
 def scale_img(img, size=(50, 50)):
     return pygame.transform.scale(img, size)
 
-player_images = [
-    scale_img(pygame.image.load(os.path.join("Images", "Character", "png", "Finja.png")).convert_alpha()),
-    scale_img(pygame.image.load(os.path.join("Images", "Character", "png", "Jan.png")).convert_alpha()),
-    scale_img(pygame.image.load(os.path.join("Images", "Character", "png", "Nina.png")).convert_alpha()),
-    scale_img(pygame.image.load(os.path.join("Images", "Character", "png", "Qianxun.png")).convert_alpha()),
-    scale_img(pygame.image.load(os.path.join("Images", "Character", "png", "racoon.png")).convert_alpha()),
-]
+player_names = []
+player_images = []
+with open("player_selection.txt", "r") as f:
+    for line in f:
+        name, img_path = line.strip().split(";")
+        player_names.append(name)
+        img = pygame.image.load(img_path)
+        player_images.append(pygame.transform.scale(img, (70, 70)))
 
 #dice image
 dice_image = pygame.image.load(os.path.join("Images", "dices.png")).convert_alpha()
@@ -221,7 +222,6 @@ class Game:
 
 # main game
 def main():
-    player_names = ["Player1", "Player2", "Player3", "Player4", "Player5"]
     game = Game(player_names, player_images, board_positions, board_coords)
     font = pygame.font.SysFont(None, 33)
     score_font = pygame.font.SysFont(None, 28)

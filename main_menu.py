@@ -2,10 +2,11 @@ import pygame
 import sys
 import subprocess
 import os
+import time
 
-SCREEN_WIDTH, SCREEN_HEIGHT = 1280, 720
 
 pygame.init()
+SCREEN_WIDTH, SCREEN_HEIGHT = 1280, 720
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("MADEIRA PARTY - Menu")
 clock = pygame.time.Clock()
@@ -15,7 +16,7 @@ current_folder = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(os.path.dirname(current_folder))
 
 base_path = os.path.dirname(os.path.abspath(__file__))
-maingame_path = os.path.join(base_path, "main_game_loop.py")
+maingame_path = os.path.join(base_path, "character_selection.py")
 
 background_path = os.path.join("Images", "main_menu_title.png")
 arrow_path = os.path.join("Images", "arrow_button.png")
@@ -76,7 +77,7 @@ while running:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if arrow_rect.collidepoint(event.pos):
                 proc = subprocess.Popen([sys.executable, maingame_path])
-                proc.wait()
+                time.sleep(0.5)
                 pygame.quit()
                 sys.exit()
 
