@@ -249,6 +249,8 @@ def main():
                 mouse_pos = pygame.mouse.get_pos()
                 if dice_rect.collidepoint(mouse_pos) and waiting_for_roll and pending_move is None and pending_field_action is None:
                     current_idx = game.turn_index
+                    player = game.players[current_idx]
+                    if player.active:
                     dice_value = game.roll_dice()
                     message = f"Player {current_idx + 1} rolled a {dice_value}."
                     show_message_ticks = pygame.time.get_ticks()
