@@ -36,7 +36,7 @@ rules = [
     "Coconut = +1 point",
     "Golden coconut = +3 point",
     "Palm leaves = -1 point",
-    "SURVIVE 60 seconds -> Success!",
+    "Use the arrow keys to NAVIGATE",
     "Press the arrow button to continue!",
 ]
 
@@ -73,7 +73,9 @@ while running:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if arrow_rect.collidepoint(event.pos):
                 # start the actual game
-                subprocess.Popen(["python", "Mini Games/catfishfever/catfish_game.py"])
+                minigame_path = os.path.join(project_root, "Mini Games", "coconutcatch", "coconutcatch_game.py")
+                proc = subprocess.Popen([sys.executable, minigame_path])
+                proc.wait()
                 pygame.quit()
                 sys.exit()
 

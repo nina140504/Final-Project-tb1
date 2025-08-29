@@ -73,7 +73,9 @@ while running:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if arrow_rect.collidepoint(event.pos):
                 # start the actual game
-                subprocess.Popen(["python", "Mini Games/catfishfever/catfish_game.py"])
+                minigame_path = os.path.join(project_root, "Mini Games", "catfishfever", "catfish_game.py")
+                proc = subprocess.Popen([sys.executable, minigame_path])
+                proc.wait()
                 pygame.quit()
                 sys.exit()
 

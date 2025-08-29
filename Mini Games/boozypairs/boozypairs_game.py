@@ -153,11 +153,14 @@ while True:
         end_text = end_font.render("Enjoy your drink!", True, (0, 220, 100))
         final_score_text = end_font.render(f"Final Score: {score}", True, (255, 220, 0))
 
-        screen.blit(end_text, (screen_width // 2 - success_text.get_width() // 2, screen_height // 2 - 100))
+        screen.blit(end_text, (screen_width // 2 - end_text.get_width() // 2, screen_height // 2 - 100))
         screen.blit(final_score_text, (screen_width // 2 - final_score_text.get_width() // 2, screen_height // 2 + 10))
+        pygame.display.flip()
+        pygame.time.wait(2000)
+        break
 
     pygame.display.flip()
 
-    print(score)
-    pygame.quit()
-    sys.exit()
+print(score)
+pygame.quit()
+sys.exit()
