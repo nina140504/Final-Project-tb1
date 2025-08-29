@@ -1,0 +1,3 @@
+Jan;Images/Character/png/Jan.png
+Finja;Images/Character/png/Qianxun.png
+Tami;Images/Character/png/racoon.png
