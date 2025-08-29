@@ -241,21 +241,36 @@ def main():
     spacing = 10
 
     while not finished:
+        while not game.players[game.turn_index].active:
+            game.next_turn()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 mouse_pos = pygame.mouse.get_pos()
-                if dice_rect.collidepoint(mouse_pos) and waiting_for_roll and pending_move is None and pending_field_action is None:
-                    current_idx = game.turn_index
-                    player = game.players[current_idx]
-                    if player.active:
-                        dice_value = game.roll_dice()
-                        message = f"Player {current_idx + 1} rolled a {dice_value}."
-                        show_message_ticks = pygame.time.get_ticks()
-                        pending_move = (current_idx, dice_value)
-                        waiting_for_roll = False
+                while not game.players[game.turn_index].active:
+                    game.next_turn()
+                current_player = game.players[game.turn_index]
+                if current_player.minigames_played >= game.total_minigames:
+                    current_player.active = False
+                    game.finished_players.add(current_player.name)
+                    game.next_turn()
+                    continue
+
+                #this part was created with ai ---
+                if (dice_rect.collidepoint(mouse_pos) and
+                        waiting_for_roll and
+                        pending_move is None and
+                        pending_field_action is None and
+                        game.players[game.turn_index].active):
+                    dice_value = game.roll_dice()
+                    message = f"Player {game.turn_index + 1} rolled a {dice_value}."
+                    show_message_ticks = pygame.time.get_ticks()
+                    pending_move = (game.turn_index, dice_value)
+                    waiting_for_roll = False
+                # ---
+
         if pending_move is not None:
         # showing message for 1 sec then screen blend
             if pygame.time.get_ticks() - show_message_ticks < 1000:
@@ -275,10 +290,14 @@ def main():
             else:
                 game.apply_field(pending_field_action)
                 finished = len(game.finished_players) == len(game.players)
+                if finished:
+                    break
                 pending_field_action = None
                 message = ""
                 waiting_for_roll = True
                 game.next_turn()
+                while not game.players[game.turn_index].active:
+                    game.next_turn()
 
         screen.fill((0,0,0))
         screen.blit(board_image, (0,0))
@@ -321,6 +340,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
