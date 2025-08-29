@@ -44,7 +44,7 @@ rules = [
 ]
 
 # box size and position
-BOX_WIDTH, BOX_HEIGHT = 800, 320
+BOX_WIDTH, BOX_HEIGHT = 800, 330
 BOX_X, BOX_Y = (SCREEN_WIDTH - BOX_WIDTH) // 2, 250
 
 running = True
@@ -68,7 +68,7 @@ while running:
     # draw the arrow button
     screen.blit(arrow_img, arrow_rect)
 
-    # handle events -> MIT AI VERSUCHT; GEHT NICHT; SPÄTER WEITERBEARTBEITEN
+    # handle events -> MIT AI VERSUCHT; GEHT NICHT; SPÄTER WEITERBEARTBEITEN (Finja fixed it :))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
