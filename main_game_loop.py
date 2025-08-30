@@ -4,6 +4,7 @@ import sys
 import random
 import os
 import subprocess
+import time
 
 #initializing the game frame
 pygame.init()
@@ -145,6 +146,11 @@ class Game:
             player.minigames_played += 1
             minigame_score = self.play_minigame(player)
             player.score += minigame_score
+            # --- this part was created with ai
+            if player.minigames_played >= self.total_minigames:
+                player.active = False
+                self.finished_players.add(player.name)
+                print (f"{player.name} is done.", self.finished_players)
     # white fields: no action
 
 
@@ -289,9 +295,22 @@ def main():
                 pass
             else:
                 game.apply_field(pending_field_action)
+                # Debugging:
+                player = pending_field_action
+                if player.minigames_played >= game.total_minigames and player.active:
+                    player.active = False
+                    game.finished_players.add(player.name)
+                    print(player.name, "finished the loop! Set:", game.finished_players)
                 finished = len(game.finished_players) == len(game.players)
                 if finished:
-                    break
+                    print("Spiel beendet: Springe zu Endscreen!")
+                    final_scores = sorted(
+                        [(p.name, p.score) for p in game.players],
+                        key=lambda x: x[1], reverse=True
+                    )
+                    pygame.quit()
+                    return final_scores
+
                 pending_field_action = None
                 message = ""
                 waiting_for_roll = True
@@ -339,4 +358,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # --- this was created with ai
+    final_scores = main()
+    from end_screen import run_end_screen
+    run_end_screen(final_scores)
+

@@ -1,1 +1,2 @@
-Finja;Images/Character/png/Qianxun.png
+Finja;Images/Character/png/Finja.png
+Nina;Images/Character/png/Qianxun.png

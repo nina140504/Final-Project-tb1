@@ -77,7 +77,7 @@ while running:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if arrow_rect.collidepoint(event.pos):
                 proc = subprocess.Popen([sys.executable, maingame_path])
-                time.sleep(0.5)
+                time.sleep(1.5)
                 pygame.quit()
                 sys.exit()
 
