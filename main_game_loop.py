@@ -303,20 +303,21 @@ def main():
                     print(player.name, "finished the loop! Set:", game.finished_players)
                 finished = len(game.finished_players) == len(game.players)
                 if finished:
-                    print("Spiel beendet: Springe zu Endscreen!")
                     final_scores = sorted(
                         [(p.name, p.score) for p in game.players],
                         key=lambda x: x[1], reverse=True
                     )
                     pygame.quit()
-                    return final_scores
-
-                pending_field_action = None
-                message = ""
-                waiting_for_roll = True
-                game.next_turn()
-                while not game.players[game.turn_index].active:
+                    from end_screen import run_end_screen
+                    run_end_screen(final_scores)
+                    sys.exit()
+                else:
+                    pending_field_action = None
+                    message = ""
+                    waiting_for_roll = True
                     game.next_turn()
+                    while not game.players[game.turn_index].active:
+                        game.next_turn()
 
         screen.fill((0,0,0))
         screen.blit(board_image, (0,0))

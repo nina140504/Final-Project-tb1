@@ -56,7 +56,7 @@ def run_end_screen(scores):
             title = large_font.render("FINAL RESULTS", True, (255, 255, 80))
             screen.blit(title, (SCREEN_WIDTH // 2 - title.get_width() // 2, BOX_Y + 30))
             for i, (name, score) in enumerate(scores):
-                result = font.render(f"{i + 1}. {name}: {score} Punkte", True, (255, 230, 120))
+                result = font.render(f"{i + 1}. {name}: {score} Points", True, (255, 230, 120))
                 screen.blit(result, (BOX_X + 70, BOX_Y + 100 + i * 35))
 
         for event in pygame.event.get():

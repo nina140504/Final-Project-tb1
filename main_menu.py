@@ -76,9 +76,9 @@ while running:
             sys.exit()
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if arrow_rect.collidepoint(event.pos):
-                proc = subprocess.Popen([sys.executable, maingame_path])
-                time.sleep(1.5)
                 pygame.quit()
+                from character_selection import character_select_main
+                character_select_main()
                 sys.exit()
 
     pygame.display.flip()
