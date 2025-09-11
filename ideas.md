@@ -20,9 +20,10 @@ funktionsweise:
 
 man sucht sich einen charakter aus. dann ließt man die erklärung. dann ist man auf karte am flughafen. 
 man hat einen "würfel" der sagt ob man 1-3 felder vorrückt. 
-- rotes feld: - 3 punkte
-- grünes feld: + 5 punkte
-- weißes feld: mini spiel  
+- blau feld: - 3 punkte
+- pink feld: + 2 punkte
+- weißes feld: nix
+- gelbes feld: minispiel
 
 das spiel läuft so lange bis man 5 minispiele gespielt hat. also man kann entweder nur 1 mal um die karte
 oder 6 mal, je nach glück. wenn man alle 5 spiele gespielt hat ist der urlaub vorbei und man muss wieder

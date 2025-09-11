@@ -27,7 +27,7 @@ def run_end_screen(scores):
         "CONGRATULATIONS!",
         "You have finished your adventure all over the island of Madeira.",
         "Hopefully you enjoyed your vacation and had a lot of fun.",
-        "Let's see who of you conquered the adventures of island the best.",
+        "Let's see who of you conquered the adventures of the island the best.",
         "Click the arrow button to see the FINAL RESULTS.",
         "Come back soon for your next holiday! :)"
     ]

@@ -35,10 +35,10 @@ font = pygame.font.SysFont("Courier New", 16, bold=True)
 rules = [
     "After a long and stressful semester you've finally decided to take a break.",
     "The goal is to score as many points as possible before the game is over.",
-    "When you land on a blue field you get -3 points,",
-    "the pink one is +2 and the yellow starts a minigame.",
-    "The points from the minigame will be added to the total score.",
-    "To move forward click the dice image in the left top corner.",
+    "When you land on a blue flower you get -3 points,",
+    "The pink one is +2 and the yellow starts a minigame.",
+    "The points from the minigames will be added to the total score.",
+    "To move forward CLICK ON THE DICE in the top left corner.",
     "The yellow frame shows who`s turn it is.",
     "The game is over when each player played 5 minigames.",
     "Are you guys ready for a fun adventure all over the island?"
