@@ -1,1 +1,3 @@
-Finja;Images/Character/png/Finja.png
+Reni;Images/Character/png/Nina.png
+Müggenbeast;Images/Character/png/Jan.png
+Finjaaaaa;Images/Character/png/Finja.png
