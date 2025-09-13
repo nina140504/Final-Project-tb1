@@ -1,2 +1,2 @@
-nina;Images\Character\png\Nina.png
-müggggi;Images\Character\png\Jan.png
+Juli;Images\Character\png\Finja.png
+ninaaaa;Images\Character\png\Nina.png

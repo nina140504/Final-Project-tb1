@@ -8,13 +8,38 @@ import time
 
 #initializing the game frame
 pygame.init()
+pygame.mixer.init()
 screen_width = 1280
 screen_height = 720
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Madeira-Party!")
 
+# paths
 board_image = pygame.image.load(os.path.join("Images", "board_map.png")).convert_alpha()
 board_image = pygame.transform.scale(board_image, (screen_width, screen_height))
+current_folder = os.path.dirname(os.path.abspath(__file__))
+sound_folder = os.path.join(current_folder, "sounds")
+
+# load sounds
+whoosh_sound = pygame.mixer.Sound(os.path.join(sound_folder, "whoosh.wav"))
+score_sound = pygame.mixer.Sound(os.path.join(sound_folder, "score.wav"))
+wrong_sound = pygame.mixer.Sound(os.path.join(sound_folder, "wrong.wav"))
+
+# helper function for the sounds
+def play_field_sound(field):
+    if field == "blue":
+        wrong_sound.play()
+    elif field == "pink" or field == "yellow":
+        score_sound.play()
+    elif field == "white":
+        whoosh_sound.play()
+
+
+# background music
+music_path = os.path.join(sound_folder, "music", "GameLoop_music_zapsplat_game_music_fun_tropical_caribean_steel_drums_percussion_008.mp3")
+pygame.mixer.music.load(music_path)
+pygame.mixer.music.set_volume(0.3)
+pygame.mixer.music.play(-1)
 
 #loading player images
 def scale_img(img, size=(50, 50)):
@@ -28,6 +53,7 @@ with open("player_selection.txt", "r") as f:
         player_names.append(name)
         img = pygame.image.load(img_path)
         player_images.append(pygame.transform.scale(img, (70, 70)))
+
 
 #dice image
 dice_image = pygame.image.load(os.path.join("Images", "dices.png")).convert_alpha()
@@ -151,7 +177,7 @@ class Game:
                 player.active = False
                 self.finished_players.add(player.name)
                 print (f"{player.name} is done.", self.finished_players)
-    # white fields: no action
+        # white has no action
 
 
     def show_minigame_overlay(self):
@@ -285,6 +311,8 @@ def main():
                 current_idx, dice_value = pending_move
                 player = game.players[current_idx]
                 player.move(dice_value, len(game.board_positions))
+                field = game.board_positions[player.position]
+                play_field_sound(field)
                 field_wait_ticks = pygame.time.get_ticks()
                 pending_field_action = player
                 pending_move = None
