@@ -1,0 +1,73 @@
+- idea was to find an efficient way to reuse parts of the already existing mini games we've created for this courses assignments
+
+- we wanted to create a fun and light atmosphere for this game that would lead to a positive player experience and interaction
+-  game resembles a simpler version of famous Mario Party -> we called it a Madeira Party because of upcoming Madeira holiday trips
+
+
+- wanted to create a game with personal and digital media references -> all characters are Digital Media inspired
+- tropical game atmosphere because of the holiday trips -> all games are resembling beach holiday activities
+
+## Progress
+- writing down our ideas and our concept (see [ideas.md])
+- figuring out which of our previous codes we could reuse
+- figuring the game code structure (having a framework (menu, character selection, result menu), the main game loop and integrating the mini games)
+-  work distribution:
+    - Finja & Nina: generating characters and game artwork with ai (suprisingly the most time consuming part of this project)
+    - Nina: mini game programming
+    - Nina: programming rules windows for the mini games
+    - Finja: programming main game loop
+    - Finja: programming the main menu, character selection and final scores menu
+- figuring out the repository structure
+    - struggle with correct committing and pulling between the two of us (that's why our commit-history is a bit chaotic :))
+    - struggle because of often needed direct file upload due to parallel work flow
+
+## Mini Games (Nina)
+- reusing old code (suitcase sort & coconut catch) -> adjusting the code and game designs
+- figuring out sounds + sound research (using Youtube tutorials by i.e. Rob Mulla, CodePad)
+- creating timer and point system for each game (research for special timer systems -> each second played scores)
+- learning how to ID images with youtube tutorials and implementing it in the code correctly with AI -> used in most minigames
+- learning how to use paths that are not computer specific by youtube tutorials
+- struggle to figure out the correct code order in the endscreen -> i knew how to do it but the order of the lines was a bit complicated for me
+- most time consuming game was the memory game
+    - using ai and youtube to figure out the code for pairings
+    - struggle: having images in random locations on the board but still have matching pairs no matter the image position
+    - 2nd struggle: correct code implementation for correct leaf behaviour -> disappearing when match, covering when no match
+- overall struggle for most games -> implementing a pixel perfect collision (worked most of the time)
+- rules screen: struggle to actually use the arrow button to go to the main game (fixed by finja when working on main game loop)
+    - once one rule screen was coded i could just reuse the code and change the text in the file (-> also used for [main_menu.py]
+
+## Image Creation (Finja & Nina)
+- most time consuming part of the project
+- took way longer than expected -> didn't match our original time plan
+- previously discussed which artwork-vibe we wanted for our game -> Stardew Valley inspired
+- decided to use ai for the graphics of the game to maintain the same style throughout the game
+- we used ai to generate the character artwork from real life images
+- also used ai to generate pictures for our specific ideas for each picture (e.g. jan with a floatie) -> was hard to create our specific vision
+- struggle because ai started to confuse prompt for different images with one another
+- second layer for the may (the flower fields and paths inbetween) were added onto the map background using adobe illustrator
+
+## Framework Menus (Finja)
+- reusing code structure from Nina's rule-files
+- struggle to get the arrow working to direct to another window without the windows instantly crashing down/closing too fast
+    - initially foxed with time.seep to create enough time for the following window to open fully
+    - (had to be refixed later because the connection for the windows with main game loop, character selection, etc. didn't work)
+- figuring out how to create the character selection menu with the function to implement the number of players +  name into main game loop -> after unsuccessful research fixed with ai
+    - fixed by creating a list/txt-file with the name that wpuld be integrated into the main game loop where it read the content
+
+## Main Game Loop (Finja)
+- first sketching down (on paper) the correct structure and working of the loop:
+    - figuring out the best way how to split the code into which file -> came up with the implementing file structure
+    - when and how to integrate the mini games,
+    - implementing the player-dice-loop (for each player to automatically stop the dice function after 5 mini games and then stop game after each player played 5 mini games)
+        - big struggle to automatically end each players turn after 5 mini games played without ending the entire game
+- starting to get all the coordinates for the fields -> and building the window and the map with functions
+- then characters and methods for players and the score system (also adding the scores from mini games)
+- later changing the characters code again -> because of decision to be able to adjust the player numbers + names in menu before
+- big struggle to later "patch" all the files (menu, character selection, etc.) together without the windows crashing down or the redirect would work for arts of the files but not for the entirety of the game -> later fixed with ai
+
+## Future improvements and known limitations
+#### Future improvements:
+- more sound effects/ moveable dice image when somebody rolls the dice
+- position adjustment from players on the map (especially when 2 players on same field (e.g. no name overlapping)
+- adjusting the chance of th mini games (e.g. making sure each player gets each game once instead of doubles)
+

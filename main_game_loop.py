@@ -295,12 +295,10 @@ def main():
                 pass
             else:
                 game.apply_field(pending_field_action)
-                # Debugging:
                 player = pending_field_action
                 if player.minigames_played >= game.total_minigames and player.active:
                     player.active = False
                     game.finished_players.add(player.name)
-                    print(player.name, "finished the loop! Set:", game.finished_players)
                 finished = len(game.finished_players) == len(game.players)
                 if finished:
                     final_scores = sorted(
