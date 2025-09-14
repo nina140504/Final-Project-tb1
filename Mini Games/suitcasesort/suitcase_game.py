@@ -20,6 +20,12 @@ current_folder = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(os.path.dirname(current_folder))
 sound_folder = os.path.join(project_root, "sounds")
 image_folder = os.path.join(project_root, "Images", "minigame_suitcase")
+music_path = os.path.join(sound_folder, "music", "terminalsong.wav")
+
+# add music
+pygame.mixer.music.load(music_path)
+pygame.mixer.music.set_volume(1.0)
+pygame.mixer.music.play(-1)
 
 # load sounds
 whoosh_sound = pygame.mixer.Sound(os.path.join(sound_folder, "whoosh.wav"))

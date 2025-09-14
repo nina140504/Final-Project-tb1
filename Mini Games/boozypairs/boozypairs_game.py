@@ -22,6 +22,12 @@ current_folder = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(os.path.dirname(current_folder))
 sound_folder = os.path.join(project_root, "sounds")
 image_folder = os.path.join(project_root, "Images", "minigame_boozypairs")
+music_path = os.path.join(sound_folder, "music", "BP_StockTune-Whispers Of Ocean Breeze_1757750036.mp3")
+
+# add music
+pygame.mixer.music.load(music_path)
+pygame.mixer.music.set_volume(0.2)
+pygame.mixer.music.play(-1)
 
 # define pairs of cards: each pair has a fruit and a cocktail
 pairs = [

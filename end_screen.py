@@ -3,10 +3,11 @@ import sys
 import subprocess
 import os
 import time
-
+import pygame.mixer
 
 def run_end_screen(scores):
     pygame.init()
+    pygame.mixer.init()
     SCREEN_WIDTH, SCREEN_HEIGHT = 1280, 720
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption("MADEIRA PARTY - Endscreen")
@@ -15,6 +16,10 @@ def run_end_screen(scores):
     arrow_path = os.path.join("Images", "arrow_button.png")
     background = pygame.image.load(background_path)
     background = pygame.transform.scale(background, (SCREEN_WIDTH, SCREEN_HEIGHT))
+    # add music
+    victory_sound = pygame.mixer.Sound(os.path.join("sounds", "victory.wav"))
+    victory_sound.set_volume(0.2)
+    victory_sound.play(loops=-1)
 
     arrow_img = pygame.image.load(arrow_path)
     arrow_img = pygame.transform.scale(arrow_img, (150, 150))
