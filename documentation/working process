@@ -24,6 +24,8 @@
 ## Mini Games (Nina)
 - reusing old code (suitcase sort & coconut catch) -> adjusting the code and game designs
 - figuring out sounds + sound research (using Youtube tutorials by i.e. Rob Mulla, CodePad)
+    - also added background music to the game and most minigames later on which was actually quite easy as i could just used the principle of the sounds in my minigames
+    - only meeded a helper function for the main game loop so i could play the correct sound of when a player gets on a field RIGHT at the rime when they hit the field -> also used google to figure that out
 - creating timer and point system for each game (research for special timer systems -> each second played scores)
 - learning how to ID images with youtube tutorials and implementing it in the code correctly with AI -> used in most minigames
 - learning how to use paths that are not computer specific by youtube tutorials
@@ -33,6 +35,8 @@
     - struggle: having images in random locations on the board but still have matching pairs no matter the image position
     - 2nd struggle: correct code implementation for correct leaf behaviour -> disappearing when match, covering when no match
 - overall struggle for most games -> implementing a pixel perfect collision (worked most of the time)
+    - researched online how to do it, i got told masks but i needed to use ai to actually implement masks into my code
+    - scoring system in ananaspong was rlly difficult because sometimes the masks of my pictures overlapped and scored consistently so you sometimes got added 15 points for one hit
 - rules screen: struggle to actually use the arrow button to go to the main game (fixed by finja when working on main game loop)
     - once one rule screen was coded i could just reuse the code and change the text in the file (-> also used for [main_menu.py]
 
@@ -70,4 +74,5 @@
 - more sound effects/ moveable dice image when somebody rolls the dice
 - position adjustment from players on the map (especially when 2 players on same field (e.g. no name overlapping)
 - adjusting the chance of th mini games (e.g. making sure each player gets each game once instead of doubles)
+- adding multiplayer minigames e.g. boozypairs where each player can flip 2 cards and then its the next ones turn
 
