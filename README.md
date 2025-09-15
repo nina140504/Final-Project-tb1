@@ -8,6 +8,8 @@ For the final project of our TechBasics course we're creating a basic digital bo
 ### Playing instructions
 To start the game run the **main_menu.py** file - the following files will then start automatically. To end the game close the window.
 
+### Licensing
+All music and sound files used in this project are royalty-free files. The images used to generate the characters with ai were all publicly available.
 
 ![image](https://github.com/user-attachments/assets/4fee095c-e9e4-4fe2-9884-af1aaeed4c19) 
 
