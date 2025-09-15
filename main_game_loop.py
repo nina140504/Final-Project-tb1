@@ -213,6 +213,11 @@ class Game:
             score = int(result.stdout.strip().splitlines()[-1])
         except Exception:
             score = 0
+
+        pygame.mixer.music.load(music_path)
+        pygame.mixer.music.set_volume(0.3)
+        pygame.mixer.music.play(-1)
+
         return score
 
     def play_turn(self):
