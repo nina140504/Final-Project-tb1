@@ -79,6 +79,7 @@ score = 0
 ball_reset_cooldown = 0
 start_ticks = pygame.time.get_ticks()
 game_over = False
+last_hit = None # used AI to fix scoring system as masks sometimes overlapped and gave too many points
 
 # main loop
 while True:
@@ -123,16 +124,29 @@ while True:
 
         # pixel perfect collision -> used AI to fix my use of masks
         offset_left = (rotated_rect.left - surfboard_rect_left.left, rotated_rect.top - surfboard_rect_left.top)
-        if surfboard_mask.overlap(ananas_mask, offset_left):
-            ball_speed[0] = abs(ball_speed[0])
-            score += 1
-            score_sound.play()
-
         offset_right = (rotated_rect.left - surfboard_rect_right.left, rotated_rect.top - surfboard_rect_right.top)
+
+        # left paddle collision
+        if surfboard_mask.overlap(ananas_mask, offset_left):
+            if last_hit != "left":  # only score if it's a new collision
+                ball_speed[0] = abs(ball_speed[0])
+                score += 1
+                score_sound.play()
+                last_hit = "left"
+        else:
+            if last_hit == "left":
+                last_hit = None  # reset once ball leaves
+
+        # right paddle collision
         if surfboard_mask.overlap(ananas_mask, offset_right):
-            ball_speed[0] = -abs(ball_speed[0])
-            score += 1
-            score_sound.play()
+            if last_hit != "right":
+                ball_speed[0] = -abs(ball_speed[0])
+                score += 1
+                score_sound.play()
+                last_hit = "right"
+        else:
+            if last_hit == "right":
+                last_hit = None
 
         # missed pineapple
         if rotated_rect.left <= 0 or rotated_rect.right >= screen_width:
@@ -146,6 +160,7 @@ while True:
             ball_speed[0] = 5 if rotated_rect.left <= 0 else -5
             ball_speed[1] = 5
             rotation_angle = 0
+            last_hit = None
 
         # draw
         screen.blit(background, (0, 0))

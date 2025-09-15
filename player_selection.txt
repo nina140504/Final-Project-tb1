@@ -1,1 +1,1 @@
-janni;Images/Character/png/Jan.png
+ni;Images\Character\png\Nina.png

@@ -205,6 +205,8 @@ class Game:
         rules_file = self.rules_files.get(basename)
         print(f"{player.name} starts {chosen_game}.")
 
+        pygame.mixer.music.fadeout(3000)
+
         result = subprocess.run([sys.executable, chosen_game], capture_output = True, text = True)
         try:
             score = int(result.stdout.strip().splitlines()[-1])
