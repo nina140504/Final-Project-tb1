@@ -1,73 +1,32 @@
-- idea was to find an efficient way to reuse parts of the already existing mini games we've created for this courses assignments
+Concept and Idea
+The idea behind our project was to find an efficient way to reuse parts of the already existing mini games that we had created for this course’s assignments. Rather than starting completely from scratch, this seemed like a reasonable and time-efficient approach.
+We also wanted to create a fun and light atmosphere for the game, something that would lead to a positive player experience and encourage interaction. The core idea was for the game to resemble a simpler version of the famous Mario Party series. Because of our upcoming holiday trips to Madeira, we decided to add a personal touch and named the project “Madeira Party.”
+Another important aspect for us was to create a game with personal and digital media references, which is why all characters are inspired by Digital Media. Adding to this, we chose a tropical game atmosphere to reflect the mood of the holiday trips, so the mini games themselves are designed to resemble beach holiday activities.
 
-- we wanted to create a fun and light atmosphere for this game that would lead to a positive player experience and interaction
--  game resembles a simpler version of famous Mario Party -> we called it a Madeira Party because of upcoming Madeira holiday trips
+Progress
+In the beginning, we started by writing down our ideas and developing a broad concept (see [ideas.md]). From there, we worked out which of our previous codes we could reuse and began to figure out a proper structure for the game code. This involved building a framework with the different key parts: the menu, the character selection, the result menu, the main game loop, and the integration of the mini games.
+The work distribution was arranged in the following way: Finja and Nina were responsible for generating the characters and the game artwork with AI, which surprisingly turned out to be the most time-consuming element of the whole project. Nina focused on programming the mini games as well as programming the rules windows for each mini game. Finja took on the task of programming the main game loop, together with the main menu, character selection, and the final scores menu.
+We also had to figure out the repository structure. This caused several struggles, mainly with correct committing and pulling between the two of us, which is why the commit history turned out a bit chaotic. Another difficulty was the need for direct file uploads quite often, due to the parallel workflow.
 
+Mini Games (Nina)
+A central part of the project was developing the mini games, and Nina was mainly responsible for this. Old code from previous assignments, such as “Suitcase Sort” and “Coconut Catch,” was reused but also needed adjustments in terms of both code and design. An essential part of this process was figuring out suitable sounds and conducting research on sound integration, relying on resources like YouTube tutorials by Rob Mulla and CodePad.
+Each mini game required an individual timer and point system. For this, special timer mechanics were researched, with the idea that each second played should score points. Additionally, Nina learned how to correctly identify and use images in code with the help of YouTube tutorials, and this was then applied to most of the mini games. Tutorials also helped with learning how to use file paths that are not computer-specific.
+One common issue throughout the mini game development was figuring out the correct code order, especially in the end screen. Even when the logic was clear, the arrangement of the lines caused problems. The most time-consuming of all the mini games was the memory game. Here, Nina relied heavily on AI assistance and YouTube tutorials to generate the pairing code. Two big struggles were making sure that images appeared in random locations on the board but still formed correct pairs, and ensuring correct behavior of the cards: disappearing when matched, turning back when not.
+Another overall problem in most of the games was implementing pixel-perfect collision detection, which worked most of the time but caused issues occasionally. Additionally, the rules screen generated issues at first, especially the use of the arrow button for navigation, which Finja later resolved while working on the main game loop. Once the first rules screen had been implemented, the code could easily be reused for the other screens, including [main_menu.py].
 
-- wanted to create a game with personal and digital media references -> all characters are Digital Media inspired
-- tropical game atmosphere because of the holiday trips -> all games are resembling beach holiday activities
+Image Creation (Finja & Nina)
+Image creation turned out to be the most time-consuming part of the project, much longer than initially expected and definitely not matching our original time plan. From the start, we had agreed on which “artwork vibe” we wanted to aim for, and we decided to go for a Stardew Valley–inspired style. To ensure that this visual style remained consistent throughout the game, we decided to use AI to generate the in-game graphics.
+For the characters, AI was used to generate artwork based on real-life images. It was also used for producing more specific pictures that we had in mind, like “Jan with a floatie,” though achieving the exact results we envisioned turned out more difficult than expected. AI often confused elements of different prompts and mixed them up, which meant we had to put a lot of effort into correcting them.
+Additionally, the second layer of the map—with flower fields and the paths in between—was added onto the map background using Adobe Illustrator.
 
-## Progress
-- writing down our ideas and our concept (see [ideas.md])
-- figuring out which of our previous codes we could reuse
-- figuring the game code structure (having a framework (menu, character selection, result menu), the main game loop and integrating the mini games)
--  work distribution:
-    - Finja & Nina: generating characters and game artwork with ai (suprisingly the most time consuming part of this project)
-    - Nina: mini game programming
-    - Nina: programming rules windows for the mini games
-    - Finja: programming main game loop
-    - Finja: programming the main menu, character selection and final scores menu
-- figuring out the repository structure
-    - struggle with correct committing and pulling between the two of us (that's why our commit-history is a bit chaotic :))
-    - struggle because of often needed direct file upload due to parallel work flow
+Framework Menus (Finja)
+For the framework menus, Finja was responsible and made use of the code structure from Nina’s rule files. A key struggle here was getting the arrow navigation to work in a way that transitioned properly between different windows, without the windows instantly crashing or closing too fast. At first, this was solved with a workaround using time.sleep, which delayed the function long enough for the next window to open. This solution, however, broke again when combining the windows with the main game loop and the character selection.
+The character selection menu was another complex part. It needed to integrate the number of players and their names into the main game loop. After several unsuccessful attempts of finding a solution through online research, AI was used to help solve this issue. Ultimately, this was done by creating a list or text file with the names, which the main game loop could then read and apply to the gameplay.
 
-## Mini Games (Nina)
-- reusing old code (suitcase sort & coconut catch) -> adjusting the code and game designs
-- figuring out sounds + sound research (using Youtube tutorials by i.e. Rob Mulla, CodePad)
-- creating timer and point system for each game (research for special timer systems -> each second played scores)
-- learning how to ID images with youtube tutorials and implementing it in the code correctly with AI -> used in most minigames
-- learning how to use paths that are not computer specific by youtube tutorials
-- struggle to figure out the correct code order in the endscreen -> i knew how to do it but the order of the lines was a bit complicated for me
-- most time consuming game was the memory game
-    - using ai and youtube to figure out the code for pairings
-    - struggle: having images in random locations on the board but still have matching pairs no matter the image position
-    - 2nd struggle: correct code implementation for correct leaf behaviour -> disappearing when match, covering when no match
-- overall struggle for most games -> implementing a pixel perfect collision (worked most of the time)
-- rules screen: struggle to actually use the arrow button to go to the main game (fixed by finja when working on main game loop)
-    - once one rule screen was coded i could just reuse the code and change the text in the file (-> also used for [main_menu.py]
+Main Game Loop (Finja)
+The game loop was one of the most complex parts of the code. Finja first sketched out the correct structure and logic on paper, working out how best to split the code into separate files to integrate everything together later. Essential to this was planning when and how the mini games should be integrated, as well as setting up the player–dice loop. The loop needed to ensure that each player automatically stopped after playing five mini games, and that the game itself would only stop once every player had completed their share. A big challenge was ending each player’s turn correctly without ending the entire game prematurely.
+After that, Finja designed the map, determined the field coordinates, and set up the game window with all its functions. Characters and methods for players were added, together with the points system that linked back to the mini games. Later, the character code had to be changed again, because we decided to add the possibility of adjusting the number of players and assigning names directly from the menu.
+One of the biggest challenges during this stage was “patching” all the files (menu, character selection, mini games, and so on) together. Often, the windows would crash when switching between them, or the redirection worked for some features but broke for others. These issues were eventually resolved with AI support.
 
-## Image Creation (Finja & Nina)
-- most time consuming part of the project
-- took way longer than expected -> didn't match our original time plan
-- previously discussed which artwork-vibe we wanted for our game -> Stardew Valley inspired
-- decided to use ai for the graphics of the game to maintain the same style throughout the game
-- we used ai to generate the character artwork from real life images
-- also used ai to generate pictures for our specific ideas for each picture (e.g. jan with a floatie) -> was hard to create our specific vision
-- struggle because ai started to confuse prompt for different images with one another
-- second layer for the may (the flower fields and paths inbetween) were added onto the map background using adobe illustrator
-
-## Framework Menus (Finja)
-- reusing code structure from Nina's rule-files
-- struggle to get the arrow working to direct to another window without the windows instantly crashing down/closing too fast
-    - initially foxed with time.seep to create enough time for the following window to open fully
-    - (had to be refixed later because the connection for the windows with main game loop, character selection, etc. didn't work)
-- figuring out how to create the character selection menu with the function to implement the number of players +  name into main game loop -> after unsuccessful research fixed with ai
-    - fixed by creating a list/txt-file with the name that wpuld be integrated into the main game loop where it read the content
-
-## Main Game Loop (Finja)
-- first sketching down (on paper) the correct structure and working of the loop:
-    - figuring out the best way how to split the code into which file -> came up with the implementing file structure
-    - when and how to integrate the mini games,
-    - implementing the player-dice-loop (for each player to automatically stop the dice function after 5 mini games and then stop game after each player played 5 mini games)
-        - big struggle to automatically end each players turn after 5 mini games played without ending the entire game
-- starting to get all the coordinates for the fields -> and building the window and the map with functions
-- then characters and methods for players and the score system (also adding the scores from mini games)
-- later changing the characters code again -> because of decision to be able to adjust the player numbers + names in menu before
-- big struggle to later "patch" all the files (menu, character selection, etc.) together without the windows crashing down or the redirect would work for arts of the files but not for the entirety of the game -> later fixed with ai
-
-## Future improvements and known limitations
-#### Future improvements:
-- more sound effects/ moveable dice image when somebody rolls the dice
-- position adjustment from players on the map (especially when 2 players on same field (e.g. no name overlapping)
-- adjusting the chance of th mini games (e.g. making sure each player gets each game once instead of doubles)
-
+Future Improvements and Known Limitations
+Looking ahead, we see several possible future improvements. Adding more sound effects would definitely improve immersion, for example by incorporating a moving dice animation whenever someone rolls. Another important improvement would be adjusting player positions on the map in cases where multiple players land on the same field, since names currently overlap. Finally, we would like to implement a fairer rotation of mini games, to make sure that each player gets to experience every mini game once, instead of sometimes repeating the same ones multiple times.
