@@ -47,6 +47,7 @@ def character_select_main():
     STATE_SELECT = 1
     STATE_DONE = 2
     state = STATE_PLAYERNUM
+    # ---
 
     num_players = None
     current_player = 0
@@ -63,6 +64,7 @@ def character_select_main():
         y = SCREEN_HEIGHT // 2 + 70 - button_height//2
         rect = pygame.Rect(x, y, button_width, button_height)
         buttons.append((rect, str(i)))
+    # ---
 
     box_width, box_height = 760, 260
     box_rect = pygame.Rect((SCREEN_WIDTH-box_width)//2, 280, box_width, box_height)
@@ -145,18 +147,17 @@ def character_select_main():
                             num_players = int(txt)
                             state = STATE_SELECT
                 elif state == STATE_SELECT:
-                    # Char-Icons Klick -- thi was created with ai
                     for i, rect in enumerate(icon_rects):
                         if rect.collidepoint(event.pos):
                             if len(player_choices)<=current_player:
                                 player_choices.append(i)
                             else:
                                 player_choices[current_player] = i
+                # --- this part was created with ai
                 elif state == STATE_DONE and arrow_rect.collidepoint(event.pos):
                     with open("player_selection.txt", "w") as f:
                         for pname, pchar in zip(player_names, player_choices):
                             f.write(f"{pname};{char_files[pchar]}\n")
-                    # --- this part was created with ai
                     pygame.quit()
                     from main_game_loop import main as game_main
                     game_main()
@@ -175,5 +176,6 @@ def character_select_main():
                         typed_name = typed_name[:-1]
                     elif len(typed_name) < 12 and event.unicode.isprintable():
                         typed_name += event.unicode
+                # ---
 
 

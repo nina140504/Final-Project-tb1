@@ -41,7 +41,7 @@ pygame.mixer.music.load(music_path)
 pygame.mixer.music.set_volume(0.3)
 pygame.mixer.music.play(-1)
 
-#loading player images
+#loading player names and images
 def scale_img(img, size=(50, 50)):
     return pygame.transform.scale(img, size)
 
@@ -115,12 +115,12 @@ board_coords = [
     (int(x / 3508 * screen_width), int(y / 2339 * screen_height))
     for (x, y) in original_board_coords
 ]
-#this part was created with ai
+# --- this part was created with ai
 assert len(board_positions) == len(board_coords)
-#
+# ---
 
 #classes for the game logic
-
+# player class with all player information
 class Player:
     def __init__(self, name, image, start_pos=0):
         self.name = name
@@ -137,6 +137,7 @@ class Player:
     def get_coords(self, board_coords):
         return board_coords[self.position]
 
+#management of the players, board structure, number of minigames, rolling the dice
 class Game:
     def __init__(self, player_names, player_images, board_positions, board_coords):
         self.players = [
@@ -159,7 +160,7 @@ class Game:
     def roll_dice(self):
         return np.random.randint(1, 7)
 
-
+#field functions
     def apply_field(self, player):
         field = self.board_positions[player.position]
         if field == "blue":
@@ -179,7 +180,7 @@ class Game:
                 print (f"{player.name} is done.", self.finished_players)
         # white has no action
 
-
+# choosing random minigame
     def show_minigame_overlay(self):
         overlay = pygame.Surface((screen_width, screen_height))
         overlay.set_alpha(180)
