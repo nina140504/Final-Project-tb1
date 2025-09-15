@@ -16,7 +16,7 @@ Another overall problem in most of the games was implementing pixel-perfect coll
 
 Image Creation (Finja & Nina)
 Image creation turned out to be the most time-consuming part of the project, much longer than initially expected and definitely not matching our original time plan. From the start, we had agreed on which “artwork vibe” we wanted to aim for, and we decided to go for a Stardew Valley–inspired style. To ensure that this visual style remained consistent throughout the game, we decided to use AI to generate the in-game graphics.
-For the characters, AI was used to generate artwork based on real-life images. It was also used for producing more specific pictures that we had in mind, like “Jan with a floatie,” though achieving the exact results we envisioned turned out more difficult than expected. AI often confused elements of different prompts and mixed them up, which meant we had to put a lot of effort into correcting them.
+For the characters, AI was used to generate artwork based on real-life images. It was also used for producing more specific pictures that we had in mind, like Jan with a floatie, though achieving the exact results we envisioned turned out more difficult than expected. AI often confused elements of different prompts and mixed them up, which meant we had to put a lot of effort into correcting them.
 Additionally, the second layer of the map—with flower fields and the paths in between—was added onto the map background using Adobe Illustrator.
 
 Framework Menus (Finja)
